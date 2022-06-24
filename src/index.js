@@ -1,17 +1,49 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import { render } from "react-dom";
+import { ApolloProvider, ApolloClient, HttpLink, InMemoryCache, split} from "@apollo/client";
+import { getMainDefinition } from "@apollo/client/utilities";
+import { WebSocketLink } from "@apollo/link-ws";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import AllCustomers from "./components/AllCustomers"
+import "./index.css";
+import "./components/css/table.css"
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+const GRAPHQL_ENDPOINT = "rechargeverse.hasura.app/v1/graphql";
+
+const httpLink = new HttpLink({
+  uri: `https://${GRAPHQL_ENDPOINT}`,
+});
+
+const wsLink = new WebSocketLink({
+  uri: `ws://${GRAPHQL_ENDPOINT}`,
+  options: {
+    reconnect: true,
+  },
+});
+
+const splitLink = split(
+  ({ query }) => {
+    const definition = getMainDefinition(query);
+    return (
+      definition.kind === "OperationDefinition" &&
+      definition.operation === "subscription"
+    );
+  },
+  wsLink,
+  httpLink
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+const client = new ApolloClient({
+  cache: new InMemoryCache(),
+  link: splitLink,
+});
+
+const App = () => (
+  <BrowserRouter>
+    <ApolloProvider client={client}>
+      <AllCustomers/>
+    </ApolloProvider>
+  </BrowserRouter>
+);
+
+render(<App />, document.getElementById("root"));
