@@ -1,67 +1,54 @@
 import React from "react";
-import { useQuery, gql } from "@apollo/client";
 import { Link } from "react-router-dom";
-
-const ALLCUSTOMERS = gql`
-query{
-    Customers {
-      id
-      number
-      operator
-      current_plan
-      service_type
-      status
-    }
-  }
-  
-`;
+import useCustomers from "./hooks/useCustomers"
 
 const AllCustomers = ({ newCustomers }) => {
-  const { loading, error, data } = useQuery(ALLCUSTOMERS);
+
+  const {error, data, loading} = useCustomers();  
 
   const tableHeader = () => {
     return (
-      <div>
-        <thead>
-            <tr>
-              <th>Customers</th>
-            </tr>
-          </thead>
           <tr>
-            <td>Number</td>
-            <td>Operator</td>
-            <td>Current Plan</td>
-            <td>Service Type</td>
-            <td>Status</td>
+            <td className="hader-data">Number</td>
+            <td className="hader-data">Operator</td>
+            <td className="hader-data">Current Plan</td>
+            <td className="hader-data">Service Type</td>
+            <td className="hader-data">Status</td>
           </tr>
-      </div>
     )
-  }
+  };
 
   const renderAllCustomers = (Customers) => {
+    console.log(data);
     return Customers.map(({ id, number, operator, current_plan, service_type, status }) => (
-        <table>
-          <div key={id}>
-            <Link to={`/Customers/${id}`}>
-              <tbody>
-                <tr>
-                  <td>{number}</td>
-                  <td>{operator}</td>
-                  <td>{current_plan}</td>
-                  <td>{service_type}</td>
-                  <td>{status}</td>
-                </tr>
-              </tbody>    
-            </Link>
-          </div>
-        </table>
+          <tr key={id}>
+            <td><Link to={`/${id}`}>{number}</Link></td>
+            <td>{operator}</td>
+            <td>{current_plan}</td>
+            <td>{service_type}</td>
+            <td>{status}</td>
+          </tr>
     ));
   };
 
   if (loading) return <p>Loading ...</p>;
   if (error) return <p>Error :(</p>;
 
-  return <div>{renderAllCustomers(newCustomers || data.Customers)}</div>;
+  return (
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th colSpan={5}>Customers</th>
+          </tr>
+          {tableHeader()}
+        </thead>
+        <tbody>
+          {renderAllCustomers(newCustomers || data.Customers)}
+        </tbody>
+      </table>
+    </div>
+  )
 };
 
 export default AllCustomers;

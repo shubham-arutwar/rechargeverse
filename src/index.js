@@ -1,47 +1,40 @@
 import React from "react";
 import { render } from "react-dom";
-import { ApolloProvider, ApolloClient, HttpLink, InMemoryCache, split} from "@apollo/client";
-import { getMainDefinition } from "@apollo/client/utilities";
-import { WebSocketLink } from "@apollo/link-ws";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { ApolloProvider, ApolloClient, createHttpLink, InMemoryCache} from "@apollo/client";
+import { setContext } from '@apollo/client/link/context';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AllCustomers from "./components/AllCustomers"
+import Customer from "./components/Customer"
 import "./index.css";
 import "./components/css/table.css"
 
-const GRAPHQL_ENDPOINT = "rechargeverse.hasura.app/v1/graphql";
+const ROLE = 'admin';
 
-const httpLink = new HttpLink({
-  uri: `https://${GRAPHQL_ENDPOINT}`,
+const authLink = setContext((_, { headers }) => {
+ return {
+ headers: {
+      'x-hasura-admin-secret': 'shubham',
+      'X-Hasura-Role': ROLE
+    }
+  }
 });
 
-const wsLink = new WebSocketLink({
-  uri: `ws://${GRAPHQL_ENDPOINT}`,
-  options: {
-    reconnect: true,
-  },
+const httpLink = createHttpLink({
+ uri: 'https://rechargeverse.hasura.app/v1/graphql',
 });
-
-const splitLink = split(
-  ({ query }) => {
-    const definition = getMainDefinition(query);
-    return (
-      definition.kind === "OperationDefinition" &&
-      definition.operation === "subscription"
-    );
-  },
-  wsLink,
-  httpLink
-);
 
 const client = new ApolloClient({
-  cache: new InMemoryCache(),
-  link: splitLink,
+ link: authLink.concat(httpLink),
+ cache: new InMemoryCache()
 });
 
 const App = () => (
   <BrowserRouter>
     <ApolloProvider client={client}>
-      <AllCustomers/>
+      <Routes>
+        <Route path="/:id" element={<Customer/>} exact />
+        <Route path="/" element={<AllCustomers/>} exact />
+      </Routes>
     </ApolloProvider>
   </BrowserRouter>
 );
