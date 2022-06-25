@@ -2,9 +2,8 @@ import React from "react";
 import { render } from "react-dom";
 import { ApolloProvider, ApolloClient, createHttpLink, InMemoryCache} from "@apollo/client";
 import { setContext } from '@apollo/client/link/context';
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import AllCustomers from "./components/AllCustomers"
-import Customer from "./components/Customer"
+import { BrowserRouter} from "react-router-dom";
+import Path from "./App";
 import "./index.css";
 import "./components/css/table.css"
 
@@ -31,10 +30,7 @@ const client = new ApolloClient({
 const App = () => (
   <BrowserRouter>
     <ApolloProvider client={client}>
-      <Routes>
-        <Route path="/:id" element={<Customer/>} exact />
-        <Route path="/" element={<AllCustomers/>} exact />
-      </Routes>
+      <Path/>
     </ApolloProvider>
   </BrowserRouter>
 );

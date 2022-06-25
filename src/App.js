@@ -1,25 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
+import {Route, Routes } from "react-router-dom";
+import AllCustomers from "./components/pages/AllCustomers"
+import Customer from "./components/pages/Customer"
+import Search from "./components/pages/Search";
+import AddCustomer from "./components/pages/AddCustomer";
 
-function App() {
+export default function Path() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route strict exact path="/:id" element={<Customer/>} />
+      <Route strict exact path="/Search" element={<Search/>} />
+      <Route strict exact path="/addCustomer" element={<AddCustomer/>} />
+      <Route strict exact path="/" element={<AllCustomers/>} />
+    </Routes>
   );
 }
-
-export default App;

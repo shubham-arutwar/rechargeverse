@@ -1,10 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import useCustomers from "./hooks/useCustomers"
+import useCustomers from "../hooks/useCustomers"
 
 const AllCustomers = ({ newCustomers }) => {
 
   const {error, data, loading} = useCustomers();  
+  console.log({loading,error,data});
 
   const tableHeader = () => {
     return (
@@ -19,7 +20,6 @@ const AllCustomers = ({ newCustomers }) => {
   };
 
   const renderAllCustomers = (Customers) => {
-    console.log(data);
     return Customers.map(({ id, number, operator, current_plan, service_type, status }) => (
           <tr key={id}>
             <td><Link to={`/${id}`}>{number}</Link></td>

@@ -1,6 +1,6 @@
 import React from "react";
-import useCustomer from "./hooks/useCustomer";
-import "./css/Customer.css";
+import useCustomer from "../hooks/useCustomer";
+import "../css/Customer.css";
 import { useParams } from "react-router-dom";
 
 
