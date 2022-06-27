@@ -1,0 +1,9 @@
+a{
+    color: #0f0f0f;
+    text-decoration: none;
+}
+
+.mainContainer{
+    display: flex;
+    flex-direction: column;
+}

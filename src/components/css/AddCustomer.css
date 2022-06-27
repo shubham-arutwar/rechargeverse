@@ -1,0 +1,47 @@
+input{
+    width: 200px;
+    text-decoration: none;
+    border: solid #0f0f0f 1px;
+}
+
+h4{
+    font-family: sans-serif;
+    font-weight: 400;
+    margin: 0;
+}
+
+.inputContainer{
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    margin: 0 0 0 0;
+}
+
+.singleRow{
+    display: flex;
+    flex-direction: row;
+    margin: 0 0 10px 0;
+}
+
+.h4ContainerI{
+    width: 160px;
+}
+
+.addBtn{
+    margin: 0 0 0 160px;
+    width: 100px;
+}
+
+.outputContainer{
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0 0 0;    
+}
+
+.outputData{
+    width: 100px;
+}
+
+.h4ContainerO{
+    width: 160px;
+}
