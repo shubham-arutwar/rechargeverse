@@ -2,7 +2,7 @@
   "name": "recharggeverse",
   "version": "0.1.0",
   "private": true,
-  "homepage": ".",
+  "homepage": "https://shubham-arutwar.github.io/recharggeverse/",
   "dependencies": {
     "@apollo/client": "^3.6.9",
     "@apollo/link-ws": "^2.0.0-beta.3",
