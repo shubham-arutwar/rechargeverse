@@ -29,7 +29,9 @@ const client = new ApolloClient({
 
 const App = () => (
   <BrowserRouter>
+  hi
     <ApolloProvider client={client}>
+      hi
       <Path/>
     </ApolloProvider>
   </BrowserRouter>
