@@ -44,7 +44,7 @@ export default function AddCustomer () {
         }
     });
 
-    console.log({loading,error,data});
+    // console.log({loading,error,data});
 
     return (
         <div className="mainContainer">
@@ -55,7 +55,7 @@ export default function AddCustomer () {
                 </div>
                 <div className="singleRow">
                     <div className="h4ContainerI"><h4>Operator</h4></div>
-                    <input minLength={2} maxLength={10} type={Text} value={operator} onChange={(e) => setOperator(e.target.value)}/>
+                    <input minLength={2} maxLength={10} value={operator} onChange={(e) => setOperator(e.target.value)}/>
                 </div>
                 <div className="singleRow">
                     <div className="h4ContainerI"><h4>Current Plan</h4></div>

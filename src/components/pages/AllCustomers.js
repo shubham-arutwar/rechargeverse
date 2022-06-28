@@ -5,11 +5,12 @@ import useCustomers from "../hooks/useCustomers"
 const AllCustomers = ({ newCustomers }) => {
 
   const {error, data, loading} = useCustomers();  
-  console.log({loading,error,data});
+  // console.log({loading,error,data});
 
   const tableHeader = () => {
     return (
           <tr>
+            <td className="hader-data">ID</td>
             <td className="hader-data">Number</td>
             <td className="hader-data">Operator</td>
             <td className="hader-data">Current Plan</td>
@@ -22,6 +23,7 @@ const AllCustomers = ({ newCustomers }) => {
   const renderAllCustomers = (Customers) => {
     return Customers.map(({ id, number, operator, current_plan, service_type, status }) => (
           <tr key={id}>
+            <td>{id}</td>
             <td><Link to={`/${id}`}>{number}</Link></td>
             <td>{operator}</td>
             <td>{current_plan}</td>
@@ -39,7 +41,7 @@ const AllCustomers = ({ newCustomers }) => {
       <table>
         <thead>
           <tr>
-            <th colSpan={5}>Customers</th>
+            <th colSpan={6}>Customers</th>
           </tr>
           {tableHeader()}
         </thead>
