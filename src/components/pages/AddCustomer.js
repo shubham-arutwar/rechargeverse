@@ -78,12 +78,12 @@ export default function AddCustomer () {
                 {error && <div>Number already exists</div>}
                 {data && (
                     <div>
-                        <div className="singleRow"><div className="h4ContainerO"><h4>Generated ID: </h4></div><h4>{data.insert_Customers_one.id}</h4></div>
-                        <div className="singleRow"><div className="h4ContainerO"><h4>Number: </h4></div><h4>{data.insert_Customers_one.number}</h4></div>
-                        <div className="singleRow"><div className="h4ContainerO"><h4>Operator: </h4></div><h4>{data.insert_Customers_one.operator}</h4></div>
-                        <div className="singleRow"><div className="h4ContainerO"><h4>Current Plan: </h4></div><h4>{data.insert_Customers_one.current_plan}</h4></div>
-                        <div className="singleRow"><div className="h4ContainerO"><h4>Service Type: </h4></div><h4>{data.insert_Customers_one.service_type}</h4></div>
-                        <div className="singleRow"><div className="h4ContainerO"><h4>Status: </h4></div><h4>{data.insert_Customers_one.status}</h4></div>
+                        <div><h4>Generated ID: </h4><h4>{data.insert_Customers_one.id}</h4></div>
+                        <div><h4>Number: </h4><h4>{data.insert_Customers_one.number}</h4></div>
+                        <div><h4>Operator: </h4><h4>{data.insert_Customers_one.operator}</h4></div>
+                        <div><h4>Current Plan: </h4><h4>{data.insert_Customers_one.current_plan}</h4></div>
+                        <div><h4>Service Type: </h4><h4>{data.insert_Customers_one.service_type}</h4></div>
+                        <div><h4>Status: </h4><h4>{data.insert_Customers_one.status}</h4></div>
                     </div>
                 )}
             </div>

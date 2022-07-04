@@ -6,9 +6,6 @@ query{
       id
       number
       operator
-      current_plan
-      service_type
-      status
     }
   }  
 `;

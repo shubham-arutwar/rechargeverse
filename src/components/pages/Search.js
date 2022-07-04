@@ -1,7 +1,6 @@
 import { gql, useLazyQuery } from "@apollo/client";
 import React, {useState} from "react";
-import "../css/main.css"
-import "../css/AddCustomer.css"
+import "../css/Search.css";
 
 const GET_BY_OPERATOR = gql`
 query GetByOperator($operator: String!){
@@ -34,17 +33,20 @@ export default function Search() {
         <div className="mainContainer">
             <div className="inputContainer">
                 <h4>Enter the Operator name to gett all respective numbers</h4>
-                <input value={operator} onKeyPress={() => getNumbers()} onChange={(e) => setOperator(e.target.value)}/>
+                <div className="innerContainer">
+                    <h4>Registered Operators - Airtel, Jio, VI</h4>
+                    <input value={operator} onKeyPress={() => getNumbers()} onChange={(e) => setOperator(e.target.value)}/>
+                    {loading && <div className="spinner">loading...</div>}
+                    {error && <div className="spinner">something went wrong</div>}
+                    {data && (
+                        <ol>
+                            {data.Customers.map(({number, current_plan})=>{
+                                return <li><div className="singleRow">{" "}{current_plan}{" | "}{number}</div></li>
+                            })}
+                        </ol>
+                    )}
+                </div>
             </div>
-            {loading && <div>loading...</div>}
-            {error && <div>something went wrong</div>}
-            {data && (
-                <ol>
-                    {data.Customers.map(({number, current_plan})=>{
-                        return <li><div className="singleRow">{" "}{current_plan}{" | "}{number}</div></li>
-                    })}
-                </ol>
-            )}
         </div>
     )
 }

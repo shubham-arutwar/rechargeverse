@@ -13,22 +13,16 @@ const AllCustomers = ({ newCustomers }) => {
             <td className="hader-data">ID</td>
             <td className="hader-data">Number</td>
             <td className="hader-data">Operator</td>
-            <td className="hader-data">Current Plan</td>
-            <td className="hader-data">Service Type</td>
-            <td className="hader-data">Status</td>
           </tr>
     )
   };
 
   const renderAllCustomers = (Customers) => {
-    return Customers.map(({ id, number, operator, current_plan, service_type, status }) => (
+    return Customers.map(({ id, number, operator}) => (
           <tr key={id}>
             <td>{id}</td>
             <td><Link to={`/${id}`}>{number}</Link></td>
             <td>{operator}</td>
-            <td>{current_plan}</td>
-            <td>{service_type}</td>
-            <td>{status}</td>
           </tr>
     ));
   };
@@ -38,6 +32,7 @@ const AllCustomers = ({ newCustomers }) => {
 
   return (
     <div>
+      <h4>Click on a number to get more details</h4>
       <table>
         <thead>
           <tr>
